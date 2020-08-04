@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4687C48824D94100005DB65E /* star-wars-api in Frameworks */ = {isa = PBXBuildFile; productRef = 4687C48724D94100005DB65E /* star-wars-api */; };
 		46C8F0F524D93CEB00B22D5E /* Star_Wars_PeepsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */; };
 		46C8F0F724D93CEB00B22D5E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8F0F624D93CEB00B22D5E /* ContentView.swift */; };
 		46C8F0F924D93CED00B22D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C8F0F824D93CED00B22D5E /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4687C48824D94100005DB65E /* star-wars-api in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +87,9 @@
 			dependencies = (
 			);
 			name = "Star Wars Peeps";
+			packageProductDependencies = (
+				4687C48724D94100005DB65E /* star-wars-api */,
+			);
 			productName = "Star Wars Peeps";
 			productReference = 46C8F0F124D93CEB00B22D5E /* Star Wars Peeps.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +117,9 @@
 				Base,
 			);
 			mainGroup = 46C8F0E824D93CEB00B22D5E;
+			packageReferences = (
+				4687C48624D94100005DB65E /* XCRemoteSwiftPackageReference "StarWarsAPI" */,
+			);
 			productRefGroup = 46C8F0F224D93CEB00B22D5E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -328,6 +336,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4687C48624D94100005DB65E /* XCRemoteSwiftPackageReference "StarWarsAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:freddyh/StarWarsAPI.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4687C48724D94100005DB65E /* star-wars-api */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4687C48624D94100005DB65E /* XCRemoteSwiftPackageReference "StarWarsAPI" */;
+			productName = "star-wars-api";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46C8F0E924D93CEB00B22D5E /* Project object */;
 }

@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
+import star_wars_api
 
 struct ContentView: View {
+    var people: [StarWarsAPI.Person]
     var body: some View {
-        Text("Hello, world!").padding()
+        VStack(alignment: .leading) {
+            ForEach(people) { p in
+                Text("hi \(p.name)")
+            }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(people: [])
     }
 }
