@@ -15,7 +15,11 @@ struct ContentView: View {
         if rootLoader.root != nil {
             List {
                 ForEach(rootLoader.root!.titles.indices) { index in
-                    Text(rootLoader.root!.titles[index])
+                    NavigationLink(
+                        destination: Text(rootLoader.root!.collections[index]),
+                        label: {
+                            Text(rootLoader.root!.titles[index])
+                        })
                 }
             }
         } else {

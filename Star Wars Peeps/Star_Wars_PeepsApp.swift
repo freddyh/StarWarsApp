@@ -15,8 +15,10 @@ struct Star_Wars_PeepsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(rootLoader: rootLoader)
-                .onAppear(perform: rootLoader.loadRoot)
+            NavigationView {
+                ContentView(rootLoader: rootLoader)
+                    .onAppear(perform: rootLoader.loadRoot)
+            }
         }
     }
 }
