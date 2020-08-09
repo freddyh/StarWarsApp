@@ -9,18 +9,23 @@ import SwiftUI
 import star_wars_api
 
 struct ContentView: View {
-    var people: [StarWarsAPI.Person]
+    @ObservedObject var rootLoader: RootLoader
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            ForEach(people) { p in
-                Text("hi \(p.name)")
+        if rootLoader.root != nil {
+            List {
+                ForEach(rootLoader.root!.titles.indices) { index in
+                    Text(rootLoader.root!.titles[index])
+                }
             }
+        } else {
+            Text("Loading...")
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(people: [])
+        ContentView(rootLoader: RootLoader.init())
     }
 }

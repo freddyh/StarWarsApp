@@ -11,22 +11,44 @@ import Combine
 
 @main
 struct Star_Wars_PeepsApp: App {
-    @ObservedObject var loader: DataLoader = DataLoader()
+    @StateObject var rootLoader = RootLoader()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(people: loader.people)
+            ContentView(rootLoader: rootLoader)
+                .onAppear(perform: rootLoader.loadRoot)
         }
     }
 }
 
-class DataLoader: ObservableObject {
+class RootLoader: ObservableObject {
+    @Published var root: StarWarsAPI.Root? = nil
     @Published var people: [StarWarsAPI.Person] = []
     
     private var cancellables: Set<AnyCancellable> = []
+        
+    func loadRoot() {
+        StarWarsAPI.rootPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in }) { (root) in
+                self.root = root
+            }.store(in: &cancellables)
+
+    }
     
-    init() {
-        StarWarsAPI.peoplePublisher().receive(on: DispatchQueue.main).sink(receiveCompletion: { _ in }) { (people) in
-            self.people = people
-        }.store(in: &cancellables)
+    func loadPeople() {
+        StarWarsAPI.peopleListPublisher()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in }) { (people) in
+                self.people = people
+            }.store(in: &cancellables)
+    }
+}
+
+extension StarWarsAPI.Root {
+    var titles: [String] {
+        self.collections.map {
+            $0.components(separatedBy: "/").dropLast().last ?? ""
+        }
     }
 }
