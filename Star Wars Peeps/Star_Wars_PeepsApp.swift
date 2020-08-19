@@ -17,40 +17,30 @@ struct Star_Wars_PeepsApp: App {
         WindowGroup {
             NavigationView {
                 ContentView(rootLoader: rootLoader)
-                    .onAppear(perform: rootLoader.loadRoot)
-            }
+            }.onAppear(perform: rootLoader.loadRoot)
         }
     }
 }
 
-class RootLoader: ObservableObject {
-    @Published var root: StarWarsAPI.Root? = nil
-    @Published var people: [StarWarsAPI.Person] = []
+class RootLoader: ObservableObject {    
+    @Published var root: [String: String] = [:]
+    @Published var people: [Person] = []
     
     private var cancellables: Set<AnyCancellable> = []
-        
-    func loadRoot() {
-        StarWarsAPI.rootPublisher()
+    
+    func loadRoot() {        
+        StarWarsAPI.rootMapPublisher()
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }) { (root) in
-                self.root = root
-            }.store(in: &cancellables)
-
+            .replaceError(with: [:])
+            .assign(to: \.root, on: self)
+            .store(in: &cancellables)
     }
     
     func loadPeople() {
         StarWarsAPI.peopleListPublisher()
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in }) { (people) in
-                self.people = people
-            }.store(in: &cancellables)
-    }
-}
-
-extension StarWarsAPI.Root {
-    var titles: [String] {
-        self.collections.map {
-            $0.components(separatedBy: "/").dropLast().last ?? ""
-        }
+            .replaceError(with: [])
+            .assign(to: \.people, on: self)
+            .store(in: &cancellables)
     }
 }
