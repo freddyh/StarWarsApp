@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4687C48824D94100005DB65E /* star-wars-api in Frameworks */ = {isa = PBXBuildFile; productRef = 4687C48724D94100005DB65E /* star-wars-api */; };
 		46C8F0F524D93CEB00B22D5E /* Star_Wars_PeepsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */; };
-		46C8F0F724D93CEB00B22D5E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8F0F624D93CEB00B22D5E /* ContentView.swift */; };
+		46C8F0F724D93CEB00B22D5E /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8F0F624D93CEB00B22D5E /* SidebarView.swift */; };
 		46C8F0F924D93CED00B22D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C8F0F824D93CED00B22D5E /* Assets.xcassets */; };
 		46C8F0FC24D93CED00B22D5E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46C8F0FB24D93CED00B22D5E /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		46C8F0F124D93CEB00B22D5E /* Star Wars Peeps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Star Wars Peeps.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star_Wars_PeepsApp.swift; sourceTree = "<group>"; };
-		46C8F0F624D93CEB00B22D5E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		46C8F0F624D93CEB00B22D5E /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		46C8F0F824D93CED00B22D5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46C8F0FB24D93CED00B22D5E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		46C8F0FD24D93CED00B22D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */,
-				46C8F0F624D93CEB00B22D5E /* ContentView.swift */,
+				46C8F0F624D93CEB00B22D5E /* SidebarView.swift */,
 				46C8F0F824D93CED00B22D5E /* Assets.xcassets */,
 				46C8F0FD24D93CED00B22D5E /* Info.plist */,
 				46C8F0FA24D93CED00B22D5E /* Preview Content */,
@@ -146,7 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46C8F0F724D93CEB00B22D5E /* ContentView.swift in Sources */,
+				46C8F0F724D93CEB00B22D5E /* SidebarView.swift in Sources */,
 				46C8F0F524D93CEB00B22D5E /* Star_Wars_PeepsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

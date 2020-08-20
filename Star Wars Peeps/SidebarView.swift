@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SidebarView.swift
 //  Star Wars Peeps
 //
 //  Created by Freddy Hernandez Jr on 8/3/20.
@@ -8,7 +8,11 @@
 import SwiftUI
 import star_wars_api
 
-enum ContentItem: Identifiable {
+enum ContentItem: Identifiable, Hashable {
+    static func == (lhs: ContentItem, rhs: ContentItem) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var id: String {
         switch self {
         case .film(let film):
@@ -42,7 +46,7 @@ struct ContentItemDetailView: View {
         case .film(let film):
             Text(film.id)
         case .people(let person):
-            HStack {
+            VStack {
                 Text(person.id)
                 Text(person.birth_year)
                 Text(person.eye_color)
@@ -82,34 +86,43 @@ struct ContentItemView: View {
 }
 
 struct ContentItemList: View {
+    let title: String
     var items: [ContentItem]
+    @Binding var selectedContentItem: ContentItem?
     var body: some View {
-        List {
+        List(selection: $selectedContentItem) {
             ForEach(items) {
                 item in
                 NavigationLink(
                     destination: ContentItemDetailView(item: item),
+                    tag: item,
+                    selection: $selectedContentItem,
                     label: {
                         ContentItemView(item: item)
                     })
             }
-        }.listStyle(SidebarListStyle())
+        }.navigationTitle(title)
     }
 }
 
-struct ContentView: View {
+struct SidebarView: View {
     @ObservedObject var rootLoader: RootLoader
+    @Binding var selectedRootItem: String?
+    @Binding var selectedContentItem: ContentItem?
     
     var body: some View {
-        List {
+        List(selection: $selectedRootItem) {
             ForEach(Array(rootLoader.root.keys), id: \.self) { index in
                 NavigationLink(
                     destination:
-                        ContentItemList(items: rootLoader.people.map { ContentItem.people($0) }).onAppear {
-                            rootLoader.loadPeople()
+                        ContentItemList(title: index,
+                                        items: rootLoader.contentItems,
+                                        selectedContentItem: $selectedContentItem)
+                        .onAppear {
+                            rootLoader.loadContentItems(index)
                         },
                     label: {
-                        Text(rootLoader.root[index]!)
+                        Text(index).font(.headline)
                     })
             }
         }.listStyle(SidebarListStyle())
@@ -118,8 +131,12 @@ struct ContentView: View {
 
 let testLoader = RootLoader()
 struct ContentView_Previews: PreviewProvider {
+    @State static var rootItem: String?
+    @State static var contentItem: ContentItem?
     static var previews: some View {
-        ContentView(rootLoader: testLoader)
+        SidebarView(rootLoader: testLoader,
+                    selectedRootItem: $rootItem,
+                    selectedContentItem: $contentItem)
             .onAppear {
                 testLoader.loadRoot()
             }
