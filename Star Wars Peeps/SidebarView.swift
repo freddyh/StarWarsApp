@@ -88,6 +88,7 @@ struct ContentItemView: View {
 struct ContentItemList: View {
     let title: String
     var items: [ContentItem]
+    var isLoading: Bool
     @Binding var selectedContentItem: ContentItem?
     var body: some View {
         List(selection: $selectedContentItem) {
@@ -101,7 +102,11 @@ struct ContentItemList: View {
                         ContentItemView(item: item)
                     })
             }
-        }.navigationTitle(title)
+        }
+        .overlay(
+            ProgressView().opacity(isLoading ? 1 : 0)
+        )
+        .navigationTitle(title)
     }
 }
 
@@ -117,6 +122,7 @@ struct SidebarView: View {
                     destination:
                         ContentItemList(title: index,
                                         items: rootLoader.contentItems,
+                                        isLoading: rootLoader.isLoadingContentItems,
                                         selectedContentItem: $selectedContentItem)
                         .onAppear {
                             rootLoader.loadContentItems(index)

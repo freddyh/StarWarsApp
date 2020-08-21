@@ -26,6 +26,7 @@ struct Star_Wars_PeepsApp: App {
                 if let rootItem = self.selectedRootItem {
                     ContentItemList(title: rootItem,
                                     items: rootLoader.contentItems,
+                                    isLoading: rootLoader.isLoadingContentItems,
                                     selectedContentItem: $selectedContentItem)
                 } else {
                     Text("Select a Root Item")
@@ -48,6 +49,7 @@ struct Star_Wars_PeepsApp: App {
 class RootLoader: ObservableObject {    
     @Published var root: [String: String] = [:]
     @Published var contentItems: [ContentItem] = []
+    @Published var isLoadingContentItems: Bool = false
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -65,12 +67,16 @@ class RootLoader: ObservableObject {
     }
     
     func loadContentItems(_ key: String) {
+        isLoadingContentItems = true
         if key.contains("people") {
             StarWarsAPI.peopleListPublisher()
                 .map({ (results) -> [ContentItem] in
                     results.map { ContentItem.people($0) }
                 })
                 .receive(on: DispatchQueue.main)
+                .handleEvents(receiveCompletion: { (_) in
+                    self.isLoadingContentItems = false
+                })
                 .replaceError(with: [])
                 .assign(to: \.contentItems, on: self)
                 .store(in: &cancellables)
@@ -81,6 +87,10 @@ class RootLoader: ObservableObject {
                     results.map { ContentItem.film($0) }
                 })
                 .receive(on: DispatchQueue.main)
+                .handleEvents(receiveCompletion: { (_) in
+                    self.isLoadingContentItems = false
+                })
+
                 .replaceError(with: [])
                 .assign(to: \.contentItems, on: self)
                 .store(in: &cancellables)
@@ -91,6 +101,10 @@ class RootLoader: ObservableObject {
                     results.map { ContentItem.starship($0) }
                 })
                 .receive(on: DispatchQueue.main)
+                .handleEvents(receiveCompletion: { (_) in
+                    self.isLoadingContentItems = false
+                })
+
                 .replaceError(with: [])
                 .assign(to: \.contentItems, on: self)
                 .store(in: &cancellables)
@@ -101,6 +115,9 @@ class RootLoader: ObservableObject {
                     results.map { ContentItem.vehicle($0) }
                 })
                 .receive(on: DispatchQueue.main)
+                .handleEvents(receiveCompletion: { (_) in
+                    self.isLoadingContentItems = false
+                })
                 .replaceError(with: [])
                 .assign(to: \.contentItems, on: self)
                 .store(in: &cancellables)
@@ -111,6 +128,10 @@ class RootLoader: ObservableObject {
                     results.map { ContentItem.species($0) }
                 })
                 .receive(on: DispatchQueue.main)
+                .handleEvents(receiveCompletion: { (_) in
+                    self.isLoadingContentItems = false
+                })
+
                 .replaceError(with: [])
                 .assign(to: \.contentItems, on: self)
                 .store(in: &cancellables)
@@ -121,6 +142,10 @@ class RootLoader: ObservableObject {
                     results.map { ContentItem.planet($0) }
                 })
                 .receive(on: DispatchQueue.main)
+                .handleEvents(receiveCompletion: { (_) in
+                    self.isLoadingContentItems = false
+                })
+
                 .replaceError(with: [])
                 .assign(to: \.contentItems, on: self)
                 .store(in: &cancellables)
