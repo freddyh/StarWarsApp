@@ -12,7 +12,6 @@ import Combine
 @main
 struct Star_Wars_PeepsApp: App {
     @StateObject var rootLoader = RootLoader()
-    
     @State var selectedRootItem: String? = "people"
     @State var selectedContentItem: ContentItem?
     
@@ -68,87 +67,48 @@ class RootLoader: ObservableObject {
     
     func loadContentItems(_ key: String) {
         isLoadingContentItems = true
+        let publisher: AnyPublisher<[ContentItem], StarWarsAPI.APIError>
         if key.contains("people") {
-            StarWarsAPI.peopleListPublisher()
-                .map({ (results) -> [ContentItem] in
-                    results.map { ContentItem.people($0) }
-                })
-                .receive(on: DispatchQueue.main)
-                .handleEvents(receiveCompletion: { (_) in
-                    self.isLoadingContentItems = false
-                })
-                .replaceError(with: [])
-                .assign(to: \.contentItems, on: self)
-                .store(in: &cancellables)
+            publisher = StarWarsAPI.peopleListPublisher()
+                .map { $0.map { ContentItem.people($0) } }
+                .eraseToAnyPublisher()
         }
         else if key.contains("film") {
-            StarWarsAPI.filmListPublisher()
-                .map({ (results) -> [ContentItem] in
-                    results.map { ContentItem.film($0) }
-                })
-                .receive(on: DispatchQueue.main)
-                .handleEvents(receiveCompletion: { (_) in
-                    self.isLoadingContentItems = false
-                })
-
-                .replaceError(with: [])
-                .assign(to: \.contentItems, on: self)
-                .store(in: &cancellables)
+            publisher = StarWarsAPI.filmListPublisher()
+                .map { $0.map { ContentItem.film($0) } }
+                .eraseToAnyPublisher()
         }
         else if key.contains("starship") {
-            StarWarsAPI.starshipListPublisher()
-                .map({ (results) -> [ContentItem] in
-                    results.map { ContentItem.starship($0) }
-                })
-                .receive(on: DispatchQueue.main)
-                .handleEvents(receiveCompletion: { (_) in
-                    self.isLoadingContentItems = false
-                })
-
-                .replaceError(with: [])
-                .assign(to: \.contentItems, on: self)
-                .store(in: &cancellables)
+            publisher = StarWarsAPI.starshipListPublisher()
+                .map { $0.map { ContentItem.starship($0) } }
+                .eraseToAnyPublisher()
         }
         else if key.contains("vehicle") {
-            StarWarsAPI.vehicleListPublisher()
-                .map({ (results) -> [ContentItem] in
-                    results.map { ContentItem.vehicle($0) }
-                })
-                .receive(on: DispatchQueue.main)
-                .handleEvents(receiveCompletion: { (_) in
-                    self.isLoadingContentItems = false
-                })
-                .replaceError(with: [])
-                .assign(to: \.contentItems, on: self)
-                .store(in: &cancellables)
+            publisher = StarWarsAPI.vehicleListPublisher()
+                .map { $0.map { ContentItem.vehicle($0) } }
+                .eraseToAnyPublisher()
         }
         else if key.contains("species") {
-            StarWarsAPI.speciesListPublisher()
-                .map({ (results) -> [ContentItem] in
-                    results.map { ContentItem.species($0) }
-                })
-                .receive(on: DispatchQueue.main)
-                .handleEvents(receiveCompletion: { (_) in
-                    self.isLoadingContentItems = false
-                })
-
-                .replaceError(with: [])
-                .assign(to: \.contentItems, on: self)
-                .store(in: &cancellables)
+            publisher = StarWarsAPI.speciesListPublisher()
+                .map { $0.map { ContentItem.species($0) } }
+                .eraseToAnyPublisher()
         }
         else if key.contains("planet") {
-            StarWarsAPI.planetListPublisher()
-                .map({ (results) -> [ContentItem] in
-                    results.map { ContentItem.planet($0) }
-                })
-                .receive(on: DispatchQueue.main)
-                .handleEvents(receiveCompletion: { (_) in
-                    self.isLoadingContentItems = false
-                })
-
-                .replaceError(with: [])
-                .assign(to: \.contentItems, on: self)
-                .store(in: &cancellables)
+            publisher = StarWarsAPI.planetListPublisher()
+                .map { $0.map { ContentItem.planet($0) } }
+                .eraseToAnyPublisher()
+        } else {
+            publisher = PassthroughSubject<[ContentItem], StarWarsAPI.APIError>()
+                .eraseToAnyPublisher()
         }
+
+        publisher
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveCompletion: { _ in
+                self.isLoadingContentItems = false
+            })
+            .replaceError(with: [])
+            .assign(to: \.contentItems, on: self)
+            .store(in: &cancellables)
     }
 }
