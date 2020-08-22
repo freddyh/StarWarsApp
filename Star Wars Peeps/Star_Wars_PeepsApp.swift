@@ -12,7 +12,7 @@ import Combine
 @main
 struct Star_Wars_PeepsApp: App {
     @StateObject var rootLoader = RootLoader()
-    @State var selectedRootItem: String? = "people"
+    @State var selectedRootItem: String? = "films"
     @State var selectedContentItem: ContentItem?
     
     var body: some Scene {
