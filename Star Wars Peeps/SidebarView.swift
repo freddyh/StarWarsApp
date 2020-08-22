@@ -57,26 +57,7 @@ struct ContentItemDetailView: View {
         case .species(let species):
             Text(species.id)
         case .starship(let starship):
-            ScrollView(.vertical) {
-                VStack {
-                    Text("Model: \(starship.model)")
-                    Text("Class: \(starship.starship_class)")
-                    Text("Manufacturer: \(starship.manufacturer)")
-                    Text("Cost: \(starship.cost_in_credits)")
-                    Text("Length (meters): \(starship.length)")
-                    Text("Crew Members Needed: \(starship.crew)")
-                    Text("Passenger Capacity: \(starship.passengers)")
-                    Text("Max Speed (atmospheric): \(starship.max_atmosphering_speed)\nHyperdrive Rating: \(starship.hyperdrive_rating)\n MPH(Megalights per Hour \(starship.MGLT)\nCargo Capacity: \(starship.cargo_capacity)\nConsumables ( maximum length of time that this starship can provide consumables for crew): \(starship.consumables)")
-                    
-                    ForEach(starship.films, id: \.self) { v in
-                        Text("Film: \(v)")
-                    }
-                    
-                    ForEach(starship.pilots, id: \.self) { v in
-                        Text("Pilot: \(v)")
-                    }
-                }.navigationTitle(starship.name)
-            }
+            StarshipDetailView(starship: starship)
         case .vehicle(let vehicle):
             Text(vehicle.id)
         }
