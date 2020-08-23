@@ -13,6 +13,9 @@
 		46874C0D24F3146C00F0358E /* PlanetDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46874C0C24F3146C00F0358E /* PlanetDetailView.swift */; };
 		46874C0F24F3148600F0358E /* SpeciesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46874C0E24F3148600F0358E /* SpeciesDetailView.swift */; };
 		46874C1124F3149E00F0358E /* VehicleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46874C1024F3149E00F0358E /* VehicleDetailView.swift */; };
+		46874C1324F318B100F0358E /* ContentItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46874C1224F318B100F0358E /* ContentItemDetailView.swift */; };
+		46874C1524F318C800F0358E /* ContentItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46874C1424F318C800F0358E /* ContentItemList.swift */; };
+		46874C1724F318F600F0358E /* RootLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46874C1624F318F600F0358E /* RootLoader.swift */; };
 		4687C48824D94100005DB65E /* star-wars-api in Frameworks */ = {isa = PBXBuildFile; productRef = 4687C48724D94100005DB65E /* star-wars-api */; };
 		46C8F0F524D93CEB00B22D5E /* Star_Wars_PeepsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */; };
 		46C8F0F724D93CEB00B22D5E /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C8F0F624D93CEB00B22D5E /* SidebarView.swift */; };
@@ -27,6 +30,9 @@
 		46874C0C24F3146C00F0358E /* PlanetDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetDetailView.swift; sourceTree = "<group>"; };
 		46874C0E24F3148600F0358E /* SpeciesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesDetailView.swift; sourceTree = "<group>"; };
 		46874C1024F3149E00F0358E /* VehicleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleDetailView.swift; sourceTree = "<group>"; };
+		46874C1224F318B100F0358E /* ContentItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentItemDetailView.swift; sourceTree = "<group>"; };
+		46874C1424F318C800F0358E /* ContentItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentItemList.swift; sourceTree = "<group>"; };
+		46874C1624F318F600F0358E /* RootLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootLoader.swift; sourceTree = "<group>"; };
 		46C8F0F124D93CEB00B22D5E /* Star Wars Peeps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Star Wars Peeps.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Star_Wars_PeepsApp.swift; sourceTree = "<group>"; };
 		46C8F0F624D93CEB00B22D5E /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
@@ -56,6 +62,8 @@
 				46874C0E24F3148600F0358E /* SpeciesDetailView.swift */,
 				461AC86D24F1DDC500C371C6 /* StarshipDetailView.swift */,
 				46874C1024F3149E00F0358E /* VehicleDetailView.swift */,
+				46874C1224F318B100F0358E /* ContentItemDetailView.swift */,
+				46874C1424F318C800F0358E /* ContentItemList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -79,12 +87,13 @@
 		46C8F0F324D93CEB00B22D5E /* Star Wars Peeps */ = {
 			isa = PBXGroup;
 			children = (
-				461AC86C24F1DDB300C371C6 /* Views */,
-				46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */,
-				46C8F0F624D93CEB00B22D5E /* SidebarView.swift */,
-				46C8F0F824D93CED00B22D5E /* Assets.xcassets */,
 				46C8F0FD24D93CED00B22D5E /* Info.plist */,
+				46874C1624F318F600F0358E /* RootLoader.swift */,
+				46C8F0F624D93CEB00B22D5E /* SidebarView.swift */,
+				46C8F0F424D93CEB00B22D5E /* Star_Wars_PeepsApp.swift */,
+				46C8F0F824D93CED00B22D5E /* Assets.xcassets */,
 				46C8F0FA24D93CED00B22D5E /* Preview Content */,
+				461AC86C24F1DDB300C371C6 /* Views */,
 			);
 			path = "Star Wars Peeps";
 			sourceTree = "<group>";
@@ -178,6 +187,9 @@
 				461AC86B24F1D4AA00C371C6 /* FilmDetailView.swift in Sources */,
 				46874C0B24F3145000F0358E /* PersonDetailView.swift in Sources */,
 				46874C0D24F3146C00F0358E /* PlanetDetailView.swift in Sources */,
+				46874C1724F318F600F0358E /* RootLoader.swift in Sources */,
+				46874C1524F318C800F0358E /* ContentItemList.swift in Sources */,
+				46874C1324F318B100F0358E /* ContentItemDetailView.swift in Sources */,
 				46C8F0F524D93CEB00B22D5E /* Star_Wars_PeepsApp.swift in Sources */,
 				461AC86E24F1DDC500C371C6 /* StarshipDetailView.swift in Sources */,
 			);
