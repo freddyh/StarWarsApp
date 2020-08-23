@@ -46,20 +46,15 @@ struct ContentItemDetailView: View {
         case .film(let film):
             FilmDetailView(film: film)
         case .people(let person):
-            VStack {
-                Text(person.id)
-                Text(person.birth_year)
-                Text(person.eye_color)
-                Text(person.gender)
-            }
+            PersonDetailView(person: person)
         case .planet(let planet):
-            Text(planet.id)
+            PlanetDetailView(planet: planet)
         case .species(let species):
-            Text(species.id)
+            SpeciesDetailView(species: species)
         case .starship(let starship):
             StarshipDetailView(starship: starship)
         case .vehicle(let vehicle):
-            Text(vehicle.id)
+            VehicleDetailView(vehicle: vehicle)
         }
     }
 }
