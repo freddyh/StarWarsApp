@@ -25,10 +25,29 @@ struct SidebarView: View {
                             rootLoader.loadContentItems(index)
                         },
                     label: {
-                        Text(index).font(.headline)
+                        Label(index.localizedCapitalized, systemImage: imageName(index)).font(.headline)
                     })
             }
         }.listStyle(SidebarListStyle())
+    }
+    
+    private func imageName(_ key: String) -> String {
+        switch key {
+        case "people":
+            return "person.3"
+        case "starships":
+            return "airplane"
+        case "vehicles":
+            return "car"
+        case "species":
+            return "ant"
+        case "films":
+            return "tv"
+        case "planets":
+            return "leaf.arrow.circlepath"
+        default:
+            return ""
+        }
     }
 }
 

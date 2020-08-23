@@ -28,7 +28,7 @@ struct ContentItemList: View {
         .overlay(
             ProgressView().opacity(isLoading ? 1 : 0)
         )
-        .navigationTitle(title)
+        .navigationTitle(title.localizedCapitalized)
     }
 }
 
